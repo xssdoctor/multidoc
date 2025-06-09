@@ -1,0 +1,15 @@
+{
+  "name": "multidoc-frontend",
+  "version": "0.1.0",
+  "description": "Frontend for Multidoc GUI",
+  "main": "main.js",
+  "scripts": {
+    "start": "echo \"No start script defined, serve via Flask backend.\" && exit 1"
+  },
+  "dependencies": {
+    "marked": "^9.1.5"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

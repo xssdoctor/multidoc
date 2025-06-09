@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multidoc • AI Explorer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Add highlight.js for code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <div class="backdrop"></div>
+
+    <div id="loginContainer" class="login-container">
+        <form id="loginForm">
+            <h2>Multidoc AI Login</h2>
+            <div class="login-input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="login-input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" id="loginButton">Login</button>
+            <p id="loginError" class="login-error-message"></p>
+        </form>
+    </div>
+
+    <div id="appWrapper" class="hidden">
+        <div class="app-container">
+        <aside id="historySidebar" class="history-sidebar">
+            <h2>History</h2>
+            <ul id="historyList">
+                <!-- History items will be populated by JavaScript -->
+            </ul>
+        </aside>
+        <div class="main-content-wrapper">
+            <header>
+                <h1>Multidoc<span class="accent">AI</span></h1>
+                <p class="production-credit">a @xssdoctor & @jhaddix production</p>
+                <p class="tagline">Multidoc is an multiprompting and output synthisis tool to take a singe question, send it to multiple AI models, and then take the best of each response and provide it to the user.</p>
+        </header>
+        
+        <main>
+            <form id="runCommandForm">
+                <div class="input-container">
+                    <div class="prompt-wrapper">
+                        <textarea id="prompt" placeholder="Ask anything..." required></textarea>
+                        <button type="submit" id="runButton">
+                            <span class="button-text">Explore</span>
+                            <span class="button-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            
+            <!-- Loading animation -->
+            <div class="loading-container" id="loadingAnimation">
+                <div class="ai-models-container">
+                    <div class="ai-model-box model-openai">
+                        <div class="model-icon">GPT</div>
+                        <div class="processing-indicator"></div>
+                        <div class="model-label">OpenAI</div>
+                    </div>
+                    <div class="ai-model-box model-claude">
+                        <div class="model-icon">C</div>
+                        <div class="processing-indicator"></div>
+                        <div class="model-label">Claude</div>
+                    </div>
+                    <div class="ai-model-box model-gemini">
+                        <div class="model-icon">G</div>
+                        <div class="processing-indicator"></div>
+                        <div class="model-label">Gemini</div>
+                    </div>
+                    <div class="ai-model-box model-lambda">
+                        <div class="model-icon">DS617B</div>
+                        <div class="processing-indicator"></div>
+                        <div class="model-label">Deepseek 617b</div>
+                    </div>
+                </div>
+                <div class="synthesis-indicator">
+                    <div class="synthesis-pulse"></div>
+                </div>
+                <p class="loading-text">Synthesizing insights across models...</p>
+            </div>
+            
+            <!-- Result area -->
+            <div class="result-container">
+                <div class="output-area" id="outputArea"></div>
+                <div class="metadata-area" id="metadataArea"></div> <!-- New metadata area -->
+            </div>
+        </main>
+        
+        <footer>
+            <p>Multidoc AI Explorer • Exploring the collective intelligence of AI models</p>
+        </footer>
+        </div> <!-- Close main-content-wrapper -->
+        </div> <!-- Close app-container -->
+    </div> <!-- Close appWrapper -->
+
+    <!-- Add Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.5/marked.min.js"></script>
+    <!-- Add highlight.js for code syntax highlighting -->
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/languages/javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/languages/python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/languages/bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/languages/go.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

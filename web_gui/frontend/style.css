@@ -1,0 +1,789 @@
+/* Modern 2025 Design System */
+:root {
+    --primary-purple: #8A2BE2;
+    --accent-purple: #CF9FFF;
+    --deep-purple: #4B0082;
+    --light-purple: #E6E6FA;
+    --dark-bg: #14112a;
+    --text-light: #F8F9FA;
+    --text-dark: #212529;
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(135deg, var(--deep-purple) 0%, var(--primary-purple) 50%, var(--accent-purple) 100%);
+    background-size: 400% 400%;
+    animation: gradientFlow 15s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.app-container {
+    width: 100%; /* Span full viewport width */
+    min-height: 100vh; /* Span full viewport height */
+    margin: 0; /* Remove auto margins for centering */
+    padding: 1.5rem; /* Add padding so content isn't flush against edges */
+    box-sizing: border-box; /* Include padding in width/height calculation */
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem; /* Space between sidebar and main content wrapper */
+    align-items: flex-start; /* Align sidebar and main content wrapper to their top */
+}
+
+header {
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, var(--text-light), var(--accent-purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.accent {
+    color: var(--accent-purple);
+    position: relative;
+}
+
+.production-credit {
+    font-size: 0.9rem;
+    color: var(--light-purple);
+    margin-top: -0.5rem; /* Pull it a bit closer to the H1 */
+    margin-bottom: 0.75rem;
+    text-align: center; /* Ensure it's centered like the H1 and tagline */
+}
+
+.metadata-area {
+    padding: 1rem 2rem; /* Match output-area horizontal padding */
+    margin-top: 1rem;
+    background-color: rgba(0, 0, 0, 0.1); /* Slightly different background */
+    border-top: 1px solid var(--glass-border);
+    color: var(--light-purple);
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    white-space: pre-wrap; /* Preserve whitespace and wrap */
+    word-break: break-all; /* Break long strings */
+    max-height: 300px; /* Optional: limit height and make it scrollable */
+    overflow-y: auto;   /* Optional: scroll if content exceeds max-height */
+}
+
+.tagline {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--light-purple);
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.85;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 2rem 0;
+}
+
+.input-container {
+    width: 100%; /* Will fill its parent */
+    /* max-width: 800px; REMOVED */
+    /* margin: 2rem auto; REMOVED */
+    margin-top: 2rem; /* Keep top margin */
+    margin-bottom: 2rem; /* Keep bottom margin */
+    position: relative;
+}
+
+.prompt-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    border-radius: 1.5rem;
+    background: rgba(25, 20, 45, 0.95);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 10px 25px var(--shadow-color);
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+}
+
+.prompt-wrapper:focus-within {
+    box-shadow: 0 15px 30px rgba(138, 43, 226, 0.25);
+    transform: translateY(-2px);
+}
+
+textarea#prompt {
+    width: 100%;
+    min-height: 60px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    padding: 1rem 1.5rem;
+    resize: none;
+    font-family: var(--font-primary);
+}
+
+textarea#prompt::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+button#runButton {
+    background: linear-gradient(90deg, var(--primary-purple), var(--accent-purple));
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    margin: 0.5rem;
+    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+}
+
+button#runButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4);
+}
+
+.button-text {
+    margin-right: 0.5rem;
+}
+
+.button-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+button#runButton:hover .button-icon {
+    transform: translateX(3px);
+}
+
+/* Loading animation */
+.loading-container {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 1rem;
+    background: rgba(25, 20, 45, 0.95);
+    border: 1px solid var(--glass-border);
+}
+
+/* AI Models animation */
+.ai-models-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.ai-model-box {
+    position: relative;
+    width: 100px; /* Increased from 80px */
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    animation: modelPulse 3s infinite;
+}
+
+.model-openai {
+    border: 2px solid rgba(10, 180, 130, 0.6);
+    animation-delay: 0s;
+}
+
+.model-claude {
+    border: 2px solid rgba(153, 102, 255, 0.6);
+    animation-delay: 0.75s;
+}
+
+.model-gemini {
+    border: 2px solid rgba(66, 133, 244, 0.6);
+    animation-delay: 1.5s;
+}
+
+.model-lambda {
+    border: 2px solid rgba(255, 196, 0, 0.6);
+    animation-delay: 2.25s;
+}
+
+@keyframes modelPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.model-icon {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.model-label {
+    position: absolute;
+    bottom: -20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--light-purple);
+    opacity: 0.9;
+}
+
+.processing-indicator {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+}
+
+.model-openai .processing-indicator {
+    background-color: rgba(10, 180, 130, 1);
+}
+
+.model-claude .processing-indicator {
+    background-color: rgba(153, 102, 255, 1);
+}
+
+.model-gemini .processing-indicator {
+    background-color: rgba(66, 133, 244, 1);
+}
+
+.model-lambda .processing-indicator {
+    background-color: rgba(255, 196, 0, 1);
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.synthesis-indicator {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(10, 180, 130, 0.3), rgba(153, 102, 255, 0.3), rgba(66, 133, 244, 0.3), rgba(255, 196, 0, 0.3));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.synthesis-pulse {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary-purple), var(--accent-purple));
+    box-shadow: 0 0 15px var(--primary-purple);
+    animation: synthesisPulse 2s infinite ease-in-out;
+}
+
+@keyframes synthesisPulse {
+    0%, 100% {
+        transform: scale(0.8);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+.loading-text {
+    font-size: 1.2rem;
+    color: var(--light-purple);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Results area */
+.result-container {
+    width: 100%; /* Will fill its parent, .main-content-wrapper */
+    /* max-width: 900px; REMOVED */
+    /* margin: 1rem auto; REMOVED */
+    margin-top: 1rem; /* Keep some top margin */
+    margin-bottom: 1rem; /* Keep some bottom margin */
+    border-radius: 1.5rem;
+    background: rgba(25, 20, 45, 0.95);
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+    box-shadow: 0 10px 25px var(--shadow-color);
+    transition: all 0.5s ease;
+}
+
+.output-area {
+    padding: 2rem;
+    min-height: 100px;
+    max-height: 600px;
+    overflow-y: auto;
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.6;
+    opacity: 0.95;
+}
+
+.output-area pre {
+    white-space: pre-wrap; /* Allows preformatted text to wrap */
+    word-wrap: break-word; /* Breaks long words if necessary */
+    background-color: rgba(0,0,0,0.2); /* Slight background for code blocks */
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto; /* Add horizontal scroll if content is still too wide after wrapping */
+}
+
+.output-area code {
+    white-space: pre-wrap; /* More aggressive wrapping for inline code */
+    word-break: break-all; /* Breaks any long string, even without spaces */
+}
+
+/* Markdown styling */
+.output-area h1, .output-area h2, .output-area h3,
+.output-area h4, .output-area h5, .output-area h6 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent-purple);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.output-area h1 { font-size: 2.2rem; }
+.output-area h2 { font-size: 1.8rem; }
+.output-area h3 { font-size: 1.5rem; }
+.output-area h4 { font-size: 1.3rem; }
+.output-area h5 { font-size: 1.1rem; }
+.output-area h6 { font-size: 1rem; }
+
+.output-area p {
+    margin-bottom: 1rem;
+}
+
+.output-area ul, .output-area ol {
+    margin: 1rem 0;
+    padding-left: 2rem;
+}
+
+.output-area li {
+    margin-bottom: 0.5rem;
+}
+
+.output-area a {
+    color: var(--accent-purple);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--accent-purple);
+    transition: all 0.2s ease;
+}
+
+.output-area a:hover {
+    filter: brightness(1.2);
+    border-bottom: 1px solid var(--accent-purple);
+}
+
+.output-area blockquote {
+    border-left: 4px solid var(--accent-purple);
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    background: rgba(138, 43, 226, 0.1);
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.output-area table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5rem 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.output-area th, .output-area td {
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+}
+
+.output-area th {
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--accent-purple);
+    font-weight: 500;
+}
+
+.output-area tr:nth-child(even) {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.output-area hr {
+    border: none;
+    height: 1px;
+    background: var(--glass-border);
+    margin: 2rem 0;
+}
+
+.output-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+}
+
+/* Scrollbar styling */
+.output-area::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.output-area::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.output-area::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.output-area::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Style for code blocks */
+.output-area pre {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.output-area code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 0.9rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.output-area pre code {
+    padding: 0;
+    background: none;
+}
+
+/* Style for strong text (model results) */
+strong {
+    color: var(--accent-purple);
+    font-weight: 600;
+}
+
+/* Style for error messages */
+.error {
+    color: #ff7979;
+    font-weight: 500;
+}
+
+/* Initial message styling */
+.initial-message {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 2rem;
+    font-style: italic;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 0.9rem;
+    color: var(--light-purple);
+    opacity: 0.7;
+}
+
+/* History Sidebar Styles */
+.history-sidebar {
+    width: 280px;
+    min-width: 220px;
+    background: rgba(20, 17, 42, 0.85); /* Slightly different from main content for distinction */
+    border-right: 1px solid var(--glass-border);
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: calc(100vh - 4rem); /* Adjust based on your header/footer or app container padding */
+    position: sticky;
+    top: 2rem; /* Match app-container margin */
+}
+
+.history-sidebar h2 {
+    font-size: 1.4rem;
+    color: var(--accent-purple);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    text-align: center;
+}
+
+#historyList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+#historyList li.history-item {
+    padding: 0.75rem 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid transparent;
+}
+
+#historyList li.history-item:hover {
+    background-color: rgba(255, 255, 255, 0.07);
+    border-color: var(--accent-purple);
+    transform: translateX(3px);
+}
+
+.history-prompt-summary {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-light);
+    margin-bottom: 0.3rem;
+    white-space: normal; /* Allow text to wrap */
+    word-break: break-word; /* Break long words if necessary */
+    overflow-wrap: break-word; /* Ensure wrapping for long strings */
+    /* overflow: hidden; and text-overflow: ellipsis; are removed */
+}
+
+.history-response-summary {
+    font-size: 0.8rem;
+    color: var(--light-purple);
+    opacity: 0.7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#historyList .no-history {
+    color: var(--light-purple);
+    opacity: 0.6;
+    text-align: center;
+    font-style: italic;
+    padding: 1rem 0;
+}
+
+/* Styles for main content area when sidebar is present */
+.main-content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 4rem); /* Ensure it takes up height */
+    max-width: calc(100% - 280px - 1.5rem); /* Adjust based on sidebar width and gap */
+}
+
+/* Scrollbar for history sidebar */
+.history-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.history-sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.history-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+}
+
+.history-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+
+/* Login Container Styles */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
+    width: 100%;
+    position: fixed; /* Cover the whole page */
+    top: 0;
+    left: 0;
+    background-color: var(--dark-bg); /* Match body background */
+    z-index: 1000; /* Ensure it's on top */
+}
+
+#loginForm {
+    background: rgba(25, 20, 45, 0.95); /* Darker, glassy background */
+    padding: 2.5rem 2rem;
+    border-radius: 1.5rem;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+#loginForm h2 {
+    color: var(--accent-purple);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-input-group {
+    margin-bottom: 1.25rem;
+    text-align: left;
+}
+
+.login-input-group label {
+    display: block;
+    color: var(--light-purple);
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+}
+
+.login-input-group input[type="text"],
+.login-input-group input[type="password"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.75rem;
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-input-group input[type="text"]:focus,
+.login-input-group input[type="password"]:focus {
+    outline: none;
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+}
+
+#loginButton {
+    background: linear-gradient(90deg, var(--primary-purple), var(--accent-purple));
+    color: white;
+    border: none;
+    border-radius: 0.75rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 0.5rem;
+    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+}
+
+#loginButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4);
+}
+
+.login-error-message {
+    color: #ff7979; /* Light red for errors */
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    min-height: 1.2em; /* Reserve space to prevent layout shift */
+}
+
+/* Utility class */
+.hidden {
+    display: none !important;
+}
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .tagline {
+        font-size: 1rem;
+    }
+    
+    .prompt-wrapper {
+        flex-direction: column;
+    }
+    
+    button#runButton {
+        width: 100%;
+        margin-top: 0.5rem;
+        justify-content: center;
+    }
+    
+    .output-area {
+        padding: 1.5rem;
+        max-height: 400px;
+    }
+}
