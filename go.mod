@@ -1,4 +1,4 @@
-module multidoc
+module github.com/xssdoctor/multidoc
 
 go 1.21
 
