@@ -33,6 +33,20 @@ A Go-based utility that processes input through multiple AI models concurrently 
 
 ## Installation
 
+### Quick Installation (Recommended)
+
+If you have Go installed, you can install `multidoc` directly:
+
+```bash
+go install github.com/xssdoctor/multidoc@latest
+```
+
+This will install the latest version of `multidoc` to your Go bin directory. Make sure your Go bin directory is in your PATH.
+
+### Manual Installation
+
+Alternatively, you can clone and build the repository manually:
+
 1.  **Clone the Repository:**
 
     ```bash
